@@ -14,10 +14,15 @@ const PrimaryButton = ({
   // Variant styles
   const variants = {
     primary: 'bg-gradient-to-r cursor-pointer from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white shadow-lg hover:shadow-xl focus:ring-orange-300',
+
     secondary: 'bg-white cursor-pointer hover:bg-gray-50 text-orange-500 border-2 border-orange-500 hover:border-orange-600 focus:ring-orange-300',
+
     outline: 'bg-transparent cursor-pointer hover:bg-orange-50 text-orange-500 border-2 border-orange-500 hover:border-orange-600 focus:ring-orange-300',
+
     ghost: 'bg-transparent hover:bg-orange-100 text-orange-500 focus:ring-orange-300',
+
     danger: 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-xl focus:ring-red-300',
+    
     success: 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-lg hover:shadow-xl focus:ring-green-300'
   };
   

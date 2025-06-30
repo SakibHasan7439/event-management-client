@@ -4,6 +4,8 @@ import Home from "../../pages/Home/Home";
 import Event from "../../pages/Event/Event";
 import RegisterPage from "../../Authentication/RegisterPage/RegisterPage";
 import Signin from "../../Authentication/Signin/Signin";
+import PrivateRoute from "../Private/PrivateRoute";
+import AddEvent from "../../pages/Add-Event/AddEvent";
 
 const route = createBrowserRouter([
     {
@@ -18,7 +20,7 @@ const route = createBrowserRouter([
 
             {
                 path: "event",
-                element: <Event />
+                element: <PrivateRoute><Event /></PrivateRoute>
             },
 
             {
@@ -29,6 +31,11 @@ const route = createBrowserRouter([
             {
                 path: "signin",
                 element: <Signin/>
+            },
+
+            {
+                path: "addEvent",
+                element: <AddEvent />
             }
         ]
     }

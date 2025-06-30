@@ -64,10 +64,10 @@ const Navbar = () => {
           <NavLink className={"navItems"} to={"event"}>
             Events
           </NavLink>
-          <NavLink className={"navItems"} to={"add-event"}>
+          <NavLink className={"navItems"} to={"addEvent"}>
             AddEvent
           </NavLink>
-          <NavLink className={"navItems"} to={"my-event"}>
+          <NavLink className={"navItems"} to={"myEvent"}>
             MyEvents
           </NavLink>
         </ul>
