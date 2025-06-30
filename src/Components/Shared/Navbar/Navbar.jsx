@@ -82,7 +82,7 @@ const Navbar = () => {
         <div className="avatar avatar-online">
           <div className="w-10 rounded-full">
             {
-              user ? <p className="text-2xl font-bold">Yes</p>:<img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" />
+              user ? <img src={user?.imageUrl} alt="user image" className="w-10" /> :<img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" />
             }
             
           </div>

@@ -4,7 +4,7 @@ import { Link, Navigate } from 'react-router';
 import { AuthContext } from '../../Auth/AuthProvider';
 
 export default function RegisterPage() {
-  const {createUser} = useContext(AuthContext);
+  const {createUser, updateUserProfile} = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -76,17 +76,26 @@ const handleChange = (e) => {
       try {
         const imageUrl = await uploadToImgBB(formData.photoURL);
 
+        // eslint-disable-next-line no-unused-vars
         const finalData = {
           ...formData,
           photoURL: imageUrl,
         };
 
+        // sign up new user
 
         createUser(formData.email, formData.password)
         .then((res) =>{
           const user = res.user;
           console.log(user);
-          console.log('Form submitted:', finalData);
+
+          // updating user profile
+          updateUserProfile(formData.name, imageUrl)
+          .then(()=>{
+            console.log("user profile updated");
+          })
+          .catch(err => console.log(err.message));
+
           alert('Registration successful!');
           Navigate("/");
         })

@@ -35,7 +35,7 @@ const route = createBrowserRouter([
 
             {
                 path: "addEvent",
-                element: <AddEvent />
+                element: <PrivateRoute><AddEvent /></PrivateRoute>
             }
         ]
     }
