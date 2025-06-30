@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router";
 import MainLayout from "../../Main-layout/MainLayout";
 import Home from "../../pages/Home/Home";
 import Event from "../../pages/Event/Event";
+import RegisterPage from "../../Authentication/RegisterPage/RegisterPage";
+import Signin from "../../Authentication/Signin/Signin";
 
 const route = createBrowserRouter([
     {
@@ -17,6 +19,16 @@ const route = createBrowserRouter([
             {
                 path: "event",
                 element: <Event />
+            },
+
+            {
+                path: "signUp",
+                element: <RegisterPage />
+            },
+
+            {
+                path: "signin",
+                element: <Signin/>
             }
         ]
     }

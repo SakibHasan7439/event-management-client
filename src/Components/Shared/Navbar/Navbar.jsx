@@ -1,7 +1,20 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import PrimaryButton from "../Primary-button/PrimaryButton";
+import { useContext } from "react";
+import { AuthContext } from "../../../Auth/AuthProvider";
 
 const Navbar = () => {
+  const {user, signout} = useContext(AuthContext);
+  const handleSignout = () =>{
+    signout()
+    .then(res =>{
+      console.log(res);
+    })
+    .catch(err =>{
+      console.log(err.message);
+    })
+  }
+
   return (
     <nav className="navbar fixed top-0 left-0 w-full h-[100px] z-50 bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -60,13 +73,18 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end gap-4">
-        <PrimaryButton 
-        variant="primary" size="lg" type="button">
-          Signin
-        </PrimaryButton>
+        {
+          user ? <PrimaryButton onClick={handleSignout} variant="primary" size="lg">Logout</PrimaryButton>
+          :
+          <Link to={"signin"}><PrimaryButton variant="primary" size="lg"    type="button">Signin</PrimaryButton></Link> 
+        }
+        
         <div className="avatar avatar-online">
           <div className="w-10 rounded-full">
-            <img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" />
+            {
+              user ? <p className="text-2xl font-bold">Yes</p>:<img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" />
+            }
+            
           </div>
         </div>
       </div>
