@@ -18,3 +18,9 @@ body {
   text-transform: uppercase;
   font-weight: 600;
 }
+
+.date {
+  letter-spacing: 9px;
+  color: white;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
