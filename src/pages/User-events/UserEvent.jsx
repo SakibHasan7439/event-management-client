@@ -17,7 +17,7 @@ const UserEvent = ({event, setMyEvents, setEvent}) => {
         }).then((result) => {
           if (result.isConfirmed) {
             axios
-              .delete(`http://localhost:3000/userEvent/${id}?email=${user?.email}`)
+              .delete(`https://event-management-server-nine.vercel.app:3000/userEvent/${id}?email=${user?.email}`)
               .then(() => {
                 setMyEvents((prev) => prev.filter((event) => event._id !== id));
                 Swal.fire({

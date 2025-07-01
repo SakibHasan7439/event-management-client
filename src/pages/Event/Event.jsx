@@ -12,7 +12,7 @@ const Event = () => {
 
   // Sample data from your JSON
   useEffect(() =>{
-    axios.get("http://localhost:3000/events")
+    axios.get("https://event-management-server-nine.vercel.app:3000/events")
     .then(res =>{
         setEventsData(res.data);
         console.log(res.data);
