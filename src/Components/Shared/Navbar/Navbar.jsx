@@ -49,7 +49,7 @@ const Navbar = () => {
           <NavLink to={"addEvent"}>
             AddEvent
           </NavLink>
-          <NavLink to={"myEvent"}>
+          <NavLink to={"myEvents"}>
             MyEvents
           </NavLink>
           </ul>
@@ -75,7 +75,7 @@ const Navbar = () => {
           <NavLink className={"navItems"} to={"addEvent"}>
             AddEvent
           </NavLink>
-          <NavLink className={"navItems"} to={"myEvent"}>
+          <NavLink className={"navItems"} to={"myEvents"}>
             MyEvents
           </NavLink>
         </ul>

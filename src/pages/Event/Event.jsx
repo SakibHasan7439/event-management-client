@@ -121,8 +121,8 @@ const Event = () => {
           {/* Search and Filter Section */}
           <div className="flex flex-col md:flex-row gap-4 max-w-4xl mx-auto">
             {/* Search Input */}
-            <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <div className="flex-1 relative border-2 border-orange-300 rounded">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white w-5 h-5" />
               <input
                 type="text"
                 placeholder="Event name, location, etc"
