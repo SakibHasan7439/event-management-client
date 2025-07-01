@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Calendar, MapPin, Users, Image, Plus } from 'lucide-react';
+import { AuthContext } from '../../Auth/AuthProvider';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 export default function AddEvent() {
+  const {user} = useContext(AuthContext);
   const [formData, setFormData] = useState({
     title: '',
     name: '',
@@ -50,53 +54,48 @@ export default function AddEvent() {
     }
   };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-//     try {
-//       let imageUrl = '';
-//       if (image) {
-//         imageUrl = await uploadToImageBB(image);
-//       }
+    try {
+      let imageUrl = '';
+      if (image) {
+        imageUrl = await uploadToImageBB(image);
+      }
 
-//       const eventData = {
-//         ...formData,
-//         imageUrl,
-//         createdAt: new Date().toISOString()
-//       };
+      const eventData = {
+        ...formData,
+        imageUrl,
+        createdAt: new Date().toISOString(),
+        createdBy: user?.email
+      };
 
-//       const response = await fetch('/api/events', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           'Authorization': `Bearer ${localStorage.getItem('token')}`
-//         },
-//         body: JSON.stringify(eventData)
-//       });
-
-//       if (response.ok) {
-//         alert('Event created successfully!');
-//         setFormData({
-//           title: '',
-//           name: '',
-//           date: '',
-//           time: '',
-//           location: '',
-//           description: '',
-//           attendeeCount: 0
-//         });
-//         setImage(null);
-//         setImagePreview(null);
-//       } else {
-//         throw new Error('Failed to create event');
-//       }
-//     } catch (error) {
-//       alert('Error creating event: ' + error.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+      axios.post("http://localhost:3000/events", eventData)
+      .then(res =>{
+        if(res.data.insertedId){
+          toast.success("data inserted successful");
+          setFormData({
+            title: '',
+            name: '',
+            date: '',
+            time: '',
+            location: '',
+            description: '',
+            attendeeCount: 0
+          });
+          setImage(null);
+          setImagePreview(null);
+          }else {
+            throw new Error('Failed to create event');
+        }
+      })
+    } catch (error) {
+      alert('Error creating event: ' + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-12 px-4">
@@ -109,7 +108,7 @@ export default function AddEvent() {
             </h1>
           </div>
 
-          <form className="p-8 space-y-6">
+          <form onSubmit={handleSubmit} className="p-8 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -255,7 +254,6 @@ export default function AddEvent() {
               <button
                 type="submit"
                 disabled={loading}
-                // onClick={handleSubmit}
                 className="w-full bg-gradient-to-r cursor-pointer from-orange-400 to-orange-500 text-white py-3 px-6 rounded-lg font-semibold text-lg hover:from-orange-500 hover:to-orange-600 focus:ring-4 focus:ring-indigo-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'Creating Event...' : 'Add Event'}

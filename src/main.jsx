@@ -5,6 +5,7 @@ import MainLayout from './Main-layout/MainLayout.jsx'
 import { RouterProvider } from 'react-router'
 import route from './Routes/public-route/route.jsx'
 import AuthProvider from './Auth/AuthProvider.jsx'
+import { Toaster } from 'react-hot-toast'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -13,5 +14,6 @@ createRoot(document.getElementById('root')).render(
         <MainLayout />
       </RouterProvider>
     </AuthProvider>
+    <Toaster />
   </StrictMode>,
 )

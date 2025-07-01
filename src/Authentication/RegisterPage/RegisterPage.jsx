@@ -2,9 +2,21 @@ import { useContext, useState } from 'react';
 import PrimaryButton from '../../Components/Shared/Primary-button/PrimaryButton';
 import { Link, Navigate } from 'react-router';
 import { AuthContext } from '../../Auth/AuthProvider';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 export default function RegisterPage() {
-  const {createUser, updateUserProfile} = useContext(AuthContext);
+  const {createUser, updateUserProfile, signupWithGoogle} = useContext(AuthContext);
+
+  // signup with google
+  const handleGoogleSignup = () =>{
+    signupWithGoogle()
+    .then((res) =>{
+      console.log("Google sign successful", res.user);
+    }).catch((err) =>{
+      console.log(err.message);
+    })
+  }
 
   const [formData, setFormData] = useState({
     name: '',
@@ -90,14 +102,22 @@ const handleChange = (e) => {
           console.log(user);
 
           // updating user profile
+          const userInfo = {
+            name: formData.name, 
+            email: formData.email
+          };
           updateUserProfile(formData.name, imageUrl)
           .then(()=>{
-            console.log("user profile updated");
+            axios.post("http://localhost:3000/users", userInfo)
+            .then((res) =>{
+              if(res.data.insertedId){
+                toast.success("user created successfully");
+              }
+            }).catch(err => console.log("data insert failed", err.message));
           })
           .catch(err => console.log(err.message));
 
-          alert('Registration successful!');
-          Navigate("/");
+          
         })
         .catch(err =>{
           console.log("error: ", err.message);
@@ -110,7 +130,7 @@ const handleChange = (e) => {
           photoURL: null
         });
       } catch (error) {
-        alert('Image upload failed. Please try again.');
+        toast.error('Image upload failed. Please try again.');
         console.error(error);
       }
     } else {
@@ -125,7 +145,7 @@ const handleChange = (e) => {
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Create your account
           </h2>
-          <PrimaryButton className='flex items-center justify-center gap-3' variant='outline' size='lg'>
+          <PrimaryButton onClick={handleGoogleSignup} className='flex items-center justify-center gap-3' variant='outline' size='lg'>
             Sign up with Google <span><img className='w-6' src="/google.png" alt="google icon" /></span></PrimaryButton>
           <p className="mt-2 text-center text-sm text-gray-600">
             Please fill in your information to register
@@ -209,7 +229,7 @@ const handleChange = (e) => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-orange-400 to-orange-500 focus:outline-none transition duration-150 ease-in-out"
+              className="group cursor-pointer relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-orange-400 to-orange-500 focus:outline-none transition duration-150 ease-in-out"
             >
               Register
             </button>
