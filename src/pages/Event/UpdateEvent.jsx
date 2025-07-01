@@ -52,7 +52,7 @@ const UpdateEvent = ({ event }) => {
         imageUrl: updatedImageUrl,
       };
 
-      const eventResponse = await axios.patch(`https://event-management-server-nine.vercel.app:3000/userEvent/${_id}?email=${user.email}`, eventInfo);
+      const eventResponse = await axios.patch(`https://event-management-server-nine.vercel.app/userEvent/${_id}?email=${user.email}`, eventInfo);
       
       if (eventResponse.data.success) {
         document.getElementById("my_modal_5").close();

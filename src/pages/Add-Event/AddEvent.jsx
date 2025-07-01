@@ -71,7 +71,7 @@ export default function AddEvent() {
         createdBy: user?.email
       };
 
-      axios.post("https://event-management-server-nine.vercel.app:3000/events", eventData)
+      axios.post("https://event-management-server-nine.vercel.app/events", eventData)
       .then(res =>{
         if(res.data.insertedId){
           toast.success("data inserted successful");

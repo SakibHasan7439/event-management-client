@@ -16,7 +16,7 @@ const UserEvents = () => {
   useEffect(() => {
     if (!user?.email) return;
     axios
-      .get(`https://event-management-server-nine.vercel.app:3000/usersEvent?email=${user?.email}`)
+      .get(`https://event-management-server-nine.vercel.app/usersEvent?email=${user?.email}`)
       .then((res) => {
         setMyEvents(res.data);
       })

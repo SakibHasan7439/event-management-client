@@ -108,7 +108,7 @@ const handleChange = (e) => {
           };
           updateUserProfile(formData.name, imageUrl)
           .then(()=>{
-            axios.post("https://event-management-server-nine.vercel.app:3000/users", userInfo)
+            axios.post("https://event-management-server-nine.vercel.app/users", userInfo)
             .then((res) =>{
               if(res.data.insertedId){
                 toast.success("user created successfully");
